@@ -98,7 +98,7 @@ class Page2 extends StatelessWidget {
       child: Center(
         child: TextButton(
           onPressed: (){
-            context.canPop() ? context.pop() : context.push('/');    
+             context.push('/');    
           }, 
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 40),
