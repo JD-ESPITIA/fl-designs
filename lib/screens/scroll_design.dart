@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 
 class ScrollScreen extends StatelessWidget {
@@ -96,7 +97,9 @@ class Page2 extends StatelessWidget {
       color: Color(0xff30BAD6),
       child: Center(
         child: TextButton(
-          onPressed: (){}, 
+          onPressed: (){
+            context.canPop() ? context.pop() : context.push('/');    
+          }, 
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 40),
             child: Text('Bienvenido', style: TextStyle( color: Colors.white, fontSize: 30 ) ),

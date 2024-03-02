@@ -1,10 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class CustomBottomNavigation extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
+      onTap: (val) {
+          
+          switch (val) {
+            case 0:
+              context.push('/');    
+              break;
+            case 1:
+              context.push('/scroll_screen');
+              break;
+            case 2:
+              context.push('/basic_screen');
+              break;
+            default:
+          }
+          
+          
+      },
       showSelectedLabels: false,
       showUnselectedLabels: false,
       selectedItemColor: Colors.pink,
@@ -14,7 +32,9 @@ class CustomBottomNavigation extends StatelessWidget {
       items: const [
         BottomNavigationBarItem(
           icon: Icon( Icons.calendar_today_outlined ),
-          label: 'Calendario'
+          label: 'Calendario',
+
+          
         ),
         BottomNavigationBarItem(
           icon: Icon( Icons.pie_chart_outline_outlined ),
