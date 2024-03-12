@@ -18,7 +18,7 @@ final pageRoutes =  <_Route>[
   _Route( FontAwesomeIcons.heading , 'Encabezados',  HomeScreen() ),
   _Route( FontAwesomeIcons.circleNotch , 'Barra Progreso', HomeScreen() ),
   _Route( FontAwesomeIcons.pinterest , 'Pinterest', HomeScreen() ),
-  _Route( FontAwesomeIcons.mobile , 'SliversHomeScreenSliverListPage()',HomeScreen() ),
+  _Route( FontAwesomeIcons.mobile , '?',HomeScreen() ),
 
 ];
 

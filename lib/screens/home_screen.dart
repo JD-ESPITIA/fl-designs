@@ -43,70 +43,73 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-
 class _MenuPrincipal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // final appTheme = Provider.of<ThemeChanger>(context);
     // final accentColor = appTheme.currentTheme.accentColor;
     return const Drawer(
-      child: Column(
-        children: [
-          SafeArea(
-            child: SizedBox(
-              width: double.infinity,
-              height: 200,
-              child: CircleAvatar(
-                backgroundColor: Colors.blue,
-                child: Text(
-                  'JD',
-                  style: TextStyle(fontSize: 50),
+      child: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: SafeArea(
+              child: SizedBox(
+                width: double.infinity,
+                height: 200,
+                child: CircleAvatar(
+                  backgroundColor: Colors.blue,
+                  child: Text(
+                    'JD',
+                    style: TextStyle(fontSize: 50),
+                  ),
                 ),
               ),
             ),
           ),
           _ListaOpciones(),
-          ListTile(
-            leading: Icon(Icons.lightbulb_outline, color: Colors.blue),
-            title: Text('Dark Mode'),
-          ),
-          SafeArea(
-            bottom: true,
-            top: false,
-            left: false,
-            right: false,
+          SliverToBoxAdapter(
             child: ListTile(
-              leading: Icon(Icons.add_to_home_screen, color: Colors.blue),
-              title: Text('Custom Theme'),
+              leading: Icon(Icons.lightbulb_outline, color: Colors.blue),
+              title: Text('Dark Mode'),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: SafeArea(
+              bottom: true,
+              top: false,
+              left: false,
+              right: false,
+              child: ListTile(
+                leading: Icon(Icons.add_to_home_screen, color: Colors.blue),
+                title: Text('Custom Theme'),
+              ),
             ),
           ),
         ],
-      ), // Llamando a la clase
+      ),
     );
   }
 }
+
 
 class _ListaOpciones extends StatelessWidget {
   const _ListaOpciones();
 
   @override
   Widget build(BuildContext context) {
-    return const Column(children: [
-      ListTile(
-        leading: Icon(Icons.lightbulb_outline, color: Colors.blue),
-        title: Text(' cargar menu aqui '),
-      ),
-      //TODO:
-      // ListView.separated(
-      //     itemBuilder: (context, i) => const ListTile(
-      //           leading: Icon(Icons.lightbulb_outline, color: Colors.blue),
-      //           title: Text('Dark s Mode'),
-      //         ),
-      //     separatorBuilder: (context, i) => const Divider(
-      //           color: Colors.blueAccent,
-      //         ),
-      //     itemCount: pageRoutes.length)
-    ]);
+    return SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (context, i) => ListTile(
+                leading: Icon(pageRoutes[i].icon, color: Colors.blue),
+                title: Text(pageRoutes[i].titulo),
+                trailing: const Icon(Icons.chevron_right, color: Colors.blue),
+                onTap:  () {
+                  Navigator.push(context,MaterialPageRoute(builder: (context)=>pageRoutes[i].page));
+                },
+              ),
+              childCount: pageRoutes.length,
+            ),
+          );
   }
 }
 
@@ -127,12 +130,10 @@ class _HomeBody extends StatelessWidget {
   }
 }
 
-
-
 // class _ListaOpciones extends StatelessWidget {
 //   @override
 //   Widget build(BuildContext context) {
-   
+
 //     return CustomScrollView(
 //       physics: const BouncingScrollPhysics(),
 //       slivers: <Widget>[
@@ -164,4 +165,3 @@ class _HomeBody extends StatelessWidget {
 //     );
 //   }
 // }
-
