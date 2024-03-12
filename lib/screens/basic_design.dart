@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_design/config/theme/app_theme.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class BasicDesignScreen extends StatelessWidget {
   @override
@@ -33,19 +35,20 @@ class Title extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var appTheme = Provider.of<AppTheme>(context).currentTheme;
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
       child: Row(
         children: [
-          const Column(
+           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 'Oeschinen Lake Campground',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               Text('Kandersteg, Switzerland',
-                  style: TextStyle(color: Colors.black45)),
+                  style: TextStyle(color: appTheme.primaryColorLight)),
             ],
           ),
           Expanded(child: Container()),

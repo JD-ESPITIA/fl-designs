@@ -1,8 +1,12 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app_design/config/theme/app_theme.dart';
+import 'package:provider/provider.dart';
 
 class Background extends StatelessWidget {
+
+
 
   final boxDecoration = BoxDecoration(
       gradient: LinearGradient(
@@ -38,6 +42,8 @@ class Background extends StatelessWidget {
 class _PinkBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    
+    var appTheme = Provider.of<AppTheme>(context).currentTheme;
     return Transform.rotate(
       angle: -pi / 5,
       child: Container(
@@ -47,8 +53,9 @@ class _PinkBox extends StatelessWidget {
           borderRadius: BorderRadius.circular(80),
           gradient: LinearGradient(
             colors: [
-              Color.fromRGBO(236, 98, 188, 1),
-              Color.fromRGBO(241, 142, 172, 1),
+              const Color.fromRGBO(236, 98, 188, 1),
+              // Color.fromRGBO(241, 142, 172, 1),
+              appTheme.hintColor
             ]
           )
         ),

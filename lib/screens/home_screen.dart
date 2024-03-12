@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_design/config/router/app_router.dart';
+import 'package:flutter_app_design/config/theme/app_theme.dart';
 
 import 'package:flutter_app_design/widgets/background.dart';
 import 'package:flutter_app_design/widgets/card_table.dart';
@@ -14,6 +15,10 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var appTheme = Provider.of<AppTheme>(context).currentTheme;
+
+    // print('Orientation $orien');
+
     return Scaffold(
       key: _scaffoldKey,
       drawer: _MenuPrincipal(),
@@ -31,6 +36,7 @@ class HomeScreen extends StatelessWidget {
           return FloatingActionButton(
             heroTag: '1',
             child: const Icon(Icons.menu),
+            backgroundColor: appTheme.hintColor,
             onPressed: () {
               Scaffold.of(context)
                   .openDrawer(); // Utiliza el contexto proporcionado por Builder
@@ -46,12 +52,13 @@ class HomeScreen extends StatelessWidget {
 class _MenuPrincipal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // final appTheme = Provider.of<ThemeChanger>(context);
+    final appTheme = Provider.of<AppTheme>(context);
     // final accentColor = appTheme.currentTheme.accentColor;
-    return const Drawer(
+    return Drawer(
+      shadowColor: appTheme.currentTheme.hintColor,
       child: CustomScrollView(
         slivers: [
-          SliverToBoxAdapter(
+          const SliverToBoxAdapter(
             child: SafeArea(
               child: SizedBox(
                 width: double.infinity,
@@ -66,11 +73,15 @@ class _MenuPrincipal extends StatelessWidget {
               ),
             ),
           ),
-          _ListaOpciones(),
+          const _ListaOpciones(),
           SliverToBoxAdapter(
             child: ListTile(
-              leading: Icon(Icons.lightbulb_outline, color: Colors.blue),
-              title: Text('Dark Mode'),
+              leading: const Icon(Icons.lightbulb_outline, color: Colors.blue),
+              title: const Text('Dark Mode'),
+              trailing: Switch.adaptive(
+                  value: appTheme.darkTheme,
+                  activeColor: Colors.blue,
+                  onChanged: (newValue) => appTheme.darkTheme = newValue),
             ),
           ),
           SliverToBoxAdapter(
@@ -80,8 +91,13 @@ class _MenuPrincipal extends StatelessWidget {
               left: false,
               right: false,
               child: ListTile(
-                leading: Icon(Icons.add_to_home_screen, color: Colors.blue),
-                title: Text('Custom Theme'),
+                leading:
+                    const Icon(Icons.add_to_home_screen, color: Colors.blue),
+                title: const Text('Custom Theme'),
+                trailing: Switch.adaptive(
+                    value: appTheme.customTheme,
+                    activeColor: Colors.blue,
+                    onChanged: (newValue) => appTheme.customTheme = newValue),
               ),
             ),
           ),
@@ -91,25 +107,25 @@ class _MenuPrincipal extends StatelessWidget {
   }
 }
 
-
 class _ListaOpciones extends StatelessWidget {
   const _ListaOpciones();
 
   @override
   Widget build(BuildContext context) {
     return SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (context, i) => ListTile(
-                leading: Icon(pageRoutes[i].icon, color: Colors.blue),
-                title: Text(pageRoutes[i].titulo),
-                trailing: const Icon(Icons.chevron_right, color: Colors.blue),
-                onTap:  () {
-                  Navigator.push(context,MaterialPageRoute(builder: (context)=>pageRoutes[i].page));
-                },
-              ),
-              childCount: pageRoutes.length,
-            ),
-          );
+      delegate: SliverChildBuilderDelegate(
+        (context, i) => ListTile(
+          leading: Icon(pageRoutes[i].icon, color: Colors.blue),
+          title: Text(pageRoutes[i].titulo),
+          trailing: const Icon(Icons.chevron_right, color: Colors.blue),
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => pageRoutes[i].page));
+          },
+        ),
+        childCount: pageRoutes.length,
+      ),
+    );
   }
 }
 
