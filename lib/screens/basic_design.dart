@@ -7,23 +7,25 @@ class BasicDesignScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
-      children: [
-        // Imagen
-        const Image(image: AssetImage('assets/landscape.jpg')),
-
-        // Title
-        const Title(),
-
-        // Button Section
-        const ButtonSection(),
-
-        // resp section
-        Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: const Text('Texto'))
-      ],
-    ));
+        body: SingleChildScrollView(
+          child: Column(
+                children: [
+          // Imagen
+          const Image(image: AssetImage('assets/landscape.jpg')),
+          
+          // Title
+          const Title(),
+          
+          // Button Section
+          const ButtonSection(),
+          
+          // resp section
+          Container(
+              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: const Text('Texto'))
+                ],
+              ),
+        ));
   }
 }
 
