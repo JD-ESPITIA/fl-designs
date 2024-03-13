@@ -18,11 +18,10 @@ class BasicDesignScreen extends StatelessWidget {
         // Button Section
         const ButtonSection(),
 
-        // Description
+        // resp section
         Container(
             margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: const Text(
-                'Laboris enim occaecat do et id velit dolore qui Lorem. Dolore ut incididunt consequat sunt do nisi aliqua pariatur ex quis cupidatat. Enim aliqua deserunt voluptate Lorem Lorem in cillum aute veniam. Ipsum irure eiusmod occaecat qui dolor consectetur aliquip deserunt sint labore qui aute mollit. Veniam duis adipisicing do mollit aliquip minim.'))
+            child: const Text('Texto'))
       ],
     ));
   }
@@ -40,7 +39,7 @@ class Title extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
       child: Row(
         children: [
-           Column(
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(

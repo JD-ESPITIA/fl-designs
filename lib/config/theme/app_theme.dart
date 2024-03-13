@@ -45,13 +45,12 @@ class AppTheme with ChangeNotifier {
   set darkTheme(bool value) {
     _customTheme = false;
     _darkTheme = value;
-    print('valueeeeeeeeeee');
-    print(value);
+    
     
     if(value){
       _currentTheme = ThemeData.dark().copyWith(
           hintColor: Colors.green
-        );;
+        );
     } else {
       _currentTheme = ThemeData.light().copyWith(
           hintColor: Colors.blueAccent
