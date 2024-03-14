@@ -2,29 +2,73 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_design/config/theme/app_theme.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class BasicDesignScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SingleChildScrollView(
-          child: Column(
-                children: [
-          // Imagen
-          const Image(image: AssetImage('assets/landscape.jpg')),
-          
-          // Title
-          const Title(),
-          
-          // Button Section
-          const ButtonSection(),
-          
-          // resp section
-          Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: const Text('Texto'))
-                ],
-              ),
+      body: PinterestGrid(),
+    );
+  }
+}
+
+class PinterestGrid extends StatefulWidget {
+  @override
+  _PinterestGridState createState() => _PinterestGridState();
+}
+
+class _PinterestGridState extends State<PinterestGrid> {
+  final List<int> items = List.generate(200, (i) => i);
+  ScrollController controller = new ScrollController();
+  double scrollAnterior = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    int count;
+    if (MediaQuery.of(context).size.width > 500) {
+      count = 6;
+    } else {
+      count = 4;
+    }
+
+    return GridView.custom(
+      gridDelegate: SliverQuiltedGridDelegate(
+        crossAxisCount: count,
+        mainAxisSpacing: 4,
+        crossAxisSpacing: 4,
+        repeatPattern: QuiltedGridRepeatPattern.inverted,
+        pattern: [
+          const QuiltedGridTile(2, 2),
+          const QuiltedGridTile(1, 1),
+          const QuiltedGridTile(1, 1),
+          const QuiltedGridTile(1, 2),
+        ],
+      ),
+      childrenDelegate: SliverChildBuilderDelegate(
+        (context, index) => _PinterestItem(index),
+      ),
+    );
+  }
+}
+
+class _PinterestItem extends StatelessWidget {
+  final int index;
+
+  const _PinterestItem(this.index);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        margin: const EdgeInsets.all(5),
+        decoration: const BoxDecoration(
+            color: Colors.blue,
+            borderRadius: BorderRadius.all(Radius.circular(30))),
+        child: Center(
+          child: CircleAvatar(
+            backgroundColor: Colors.white,
+            child: Text('$index'),
+          ),
         ));
   }
 }

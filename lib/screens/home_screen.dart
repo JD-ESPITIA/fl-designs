@@ -22,7 +22,8 @@ class HomeScreen extends StatelessWidget {
     final screenSize = MediaQuery.of(context).size;
     return OrientationBuilder(
       builder: (BuildContext context, Orientation orientation) {
-
+        print('screenSize.width');
+        print(screenSize.width);
         if (screenSize.width > 500) {
           return TabletLauncher(scaffoldKey: _scaffoldKey, appTheme: appTheme);
         } else {
